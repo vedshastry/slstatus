@@ -39,6 +39,12 @@ In order to build slstatus you need the Xlib header files.
 
 ## Installation
 
+Important dependency - requires the font-awesome package to display icons on the statusbar.
+
+```
+sudo pacman -S ttf-font-awesome
+```
+
 Edit config.mk to match your local setup (slstatus is installed into the
 /usr/local namespace by default).
 
