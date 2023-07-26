@@ -53,7 +53,9 @@ static const struct arg args[] = {
     /* function format                  argument */
     { run_command, ": %4s | ", "amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1" },
     { brightness, ": %s%% | ",    "amdgpu_bl0" },
-    { cpu_perc, "[CPU  %s%%]   ", NULL	      },	
-    { ram_perc, "[RAM  %s%%]   ", NULL	      },	
-    { datetime, "%s",           "%a %b %d %r" },
+    // { cpu_perc, "[CPU  %s%%] | ", NULL	      },
+    // { ram_perc, "[RAM  %s%%] | ", NULL	      },
+    { cpu_perc, ": %s%% | ", NULL	      },
+    { ram_perc, ": %s%% | ", NULL	      },
+    { datetime, "[%s] | ",           "%a %b %d %r" },
 };
