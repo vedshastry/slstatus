@@ -53,8 +53,8 @@ static const struct arg args[] = {
     /* function format                  argument */
     { run_command, ": %4s | ", "amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1" },
     { brightness, ": %s%% | ",    "amdgpu_bl0" },
-    { battery_perc, ": %s%% | ", "BAT0"	      },
     { cpu_perc, ": %s%% | ", NULL	      },
     { ram_perc, ": %s%% | ", NULL	      },
+    { battery_perc, ": %s%% | ", "BAT0"	      },
     { datetime, "[%s] | ",           "%a %b %d %r" },
 };
