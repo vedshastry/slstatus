@@ -53,7 +53,7 @@ static const struct arg args[] = {
     /* function format                  argument */
     { wifi_perc,    " [W: %s%%] ",      "wlp3s0"},
     { run_command,  " [V: %s%%] ",      "get-volume"},
-    { brightness,   " [B: %s%%] ",      "intel_backlight" },
+    { brightness,   " [B: %s%%] ",      "amdgpu_bl1" },
     { cpu_perc,     " [CPU: %s%%] ",    NULL },
     { ram_perc,     " [RAM: %s%%] ",    NULL },
     { datetime,     " %s ",             "%B %d (%a) %H:%M" },
