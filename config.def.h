@@ -52,6 +52,7 @@ static const char unknown_str[] = "n/a";
 static const struct arg args[] = {
     /* function format                  argument */
     { run_command, ": %4s | ", "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100 \"%\"}'" },
+    { run_command, ": %4s | ", "/run/current-system/sw/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | /run/current-system/sw/bin/awk '{ if ($3 == \"[MUTED]\") print \"M\"; else print int($2 * 100) \"%\" }'" },
     { brightness, ": %s%% | ",    "amdgpu_bl0" },
     { cpu_perc, ": %s%% | ", NULL	      },
     { ram_perc, ": %s%% | ", NULL	      },
