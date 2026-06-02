@@ -51,11 +51,12 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
     /* function format                  argument */
-    { run_command, ": %4s | ", "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100 \"%\"}'" },
-    { run_command, ": %4s | ", "/run/current-system/sw/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | /run/current-system/sw/bin/awk '{ if ($3 == \"[MUTED]\") print \"M\"; else print int($2 * 100) \"%\" }'" },
-    { brightness, ": %s%% | ",    "amdgpu_bl0" },
-    { cpu_perc, ": %s%% | ", NULL	      },
-    { ram_perc, ": %s%% | ", NULL	      },
-    { battery_perc, ": %s%% | ", "BAT0"	      },
-    { datetime, "[%s] | ",           "%a %b %d %r" },
+    /* Audio: Prepend XDG_RUNTIME_DIR so wpctl can talk to PipeWire in the background */
+    /* Brightness: Let brightnessctl auto-detect the active AMD backlight */
+    { run_command, ": %s | ", "XDG_RUNTIME_DIR=/run/user/1000 /run/current-system/sw/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ if ($3 == \"[MUTED]\") print \"Mute\"; else print int($2 * 100) \"%\" }'" },
+    { run_command, ": %s | ", "brightnessctl -m | awk -F, '{print $4}'" },
+    { cpu_perc,    ": %s%% | ", NULL          },
+    { ram_perc,    ": %s%% | ", NULL          },
+    { battery_perc,": %s%% | ", "BAT0"        },
+    { datetime,    "[%s]",       "%a %b %d %r" },
 };
