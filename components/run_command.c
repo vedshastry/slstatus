@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -15,7 +16,12 @@ run_command(const char *cmd)
 		return NULL;
 	}
 	p = fgets(buf, sizeof(buf) - 1, fp);
-	if (pclose(fp) < 0) {
+	/* A parent (e.g. dwm) may set SIGCHLD to SIG_IGN / SA_NOCLDWAIT, which is
+	 * inherited here and makes the kernel auto-reap the popen child before
+	 * pclose() can wait() for it. pclose() then fails with ECHILD even though
+	 * the command ran fine and its output was already read above -- so treat
+	 * ECHILD as success rather than discarding valid output. */
+	if (pclose(fp) < 0 && errno != ECHILD) {
 		warn("pclose '%s':", cmd);
 		return NULL;
 	}
